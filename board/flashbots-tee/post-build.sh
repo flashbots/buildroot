@@ -13,3 +13,7 @@ else
     # Copy grub 1st stage to binaries, required for genimage
     cp -f "$TARGET_DIR/lib/grub/i386-pc/boot.img" "$BINARIES_DIR"
 fi
+
+# Set root password
+ROOT_PASSWD=$(openssl passwd -6 -salt sy4v3 root)
+sed -i -E "s|^root:[^:]+:|root:${ROOT_PASSWD}:|" "${TARGET_DIR}/etc/shadow"
