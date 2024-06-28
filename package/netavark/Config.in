@@ -1,0 +1,9 @@
+config BR2_PACKAGE_NETAVARK
+	bool "netavark"
+	depends on BR2_PACKAGE_HOST_RUSTC_TARGET_ARCH_SUPPORTS
+  select BR2_PACKAGE_HOST_RUSTC
+
+	help
+	  Container network stack.
+
+	  https://github.com/containers/netavark/

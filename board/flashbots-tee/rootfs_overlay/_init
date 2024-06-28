@@ -1,0 +1,16 @@
+#!/bin/sh
+
+exec /bin/sh
+# Mount proc and sysfs
+mount -t proc -o nosuid,nodev,noexec none /proc
+mount -t sysfs -o nosuid,nodev,noexec none /sys
+
+# devtmpfs does not get automounted for initramfs
+/bin/mount -t devtmpfs devtmpfs /dev
+
+mkdir /overlay
+mount /dev/sda1 /overlay/
+mkdir -p /overlay/newroot /overlay/upper /overlay/work
+mount -t overlay overlay -o noatime,lowerdir=/,upperdir=/overlay/upper,workdir=/overlay/work /overlay/newroot
+
+exec chroot /overlay/newroot/ /sbin/init
