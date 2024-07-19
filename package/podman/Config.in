@@ -18,7 +18,7 @@ config BR2_PACKAGE_PODMAN
 	select BR2_PACKAGE_CA_CERTIFICATES # Required for the podman pull command via https
 	select BR2_PACKAGE_SHADOW # Required for rootless support
   select BR2_PACKAGE_SHADOW_SUBORDINATE_IDS # Required for rootless support
-	select BR2_PACKAGE_SLIRP4NETNS # Required for rootless network access
+	select BR2_PACKAGE_PASST # Required for rootless network access
 
 	depends on !BR2_TOOLCHAIN_USES_UCLIBC # no fexecve
 	help
